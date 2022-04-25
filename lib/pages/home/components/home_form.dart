@@ -14,9 +14,10 @@ class HomeForm extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    void _onPressed() {
+    Future<void> _onPressed() async {
       _homeFormKey.currentState!.save();
       if (_homeFormKey.currentState!.validate()) {
+        await homeController.open();
         Navigator.of(context).pushNamed('/nameinfo');
       }
     }
@@ -47,7 +48,7 @@ class HomeForm extends StatelessWidget {
                 //fillColor: Colors.green
               ),
               onSaved: (value) {
-                homeController.table = value == null ? "" : value.trim();
+                homeController.code = value == null ? "" : value.trim();
               },
             ),
             const SizedBox(
