@@ -24,4 +24,14 @@ class TableConnect extends BaseConnect {
 
     return response;
   }
+
+  // Close
+  Future<Response> close(int id) async {
+    debugPrint('Table Connect');
+    final response = await put('/table/close/${id.toString()}', '');
+    //Get.log(response.body.toString());
+    debugPrint(response.body.toString());
+
+    return response;
+  }
 }

@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:le_menu_mobile/controllers/home_controller.dart';
 import 'package:le_menu_mobile/utils/widgets/text_logo.dart';
 
 import '../../../controllers/name_controller.dart';
@@ -14,10 +15,14 @@ class NameForm extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    void _onPressed() {
+    Future<void> _onPressed() async {
       _nameFormKey.currentState!.save();
       if (_nameFormKey.currentState!.validate()) {
-        Navigator.of(context).pushNamed('/cardapio');
+        await nameController.newUser();
+
+        if (!nameController.error) {
+          Navigator.of(context).pushNamed('/cardapio');
+        }
       }
     }
 
@@ -27,6 +32,7 @@ class NameForm extends StatelessWidget {
         key: _nameFormKey,
         child: Column(mainAxisAlignment: MainAxisAlignment.center, children: [
           const TextLogo(),
+          const Icon(Icons.person),
           const SizedBox(
             height: 32,
           ),
@@ -51,15 +57,19 @@ class NameForm extends StatelessWidget {
           const SizedBox(
             height: 16,
           ),
-          HomeButton(
-            onPressed: _onPressed,
-            child: const Text(
-              "Confirmar",
-              style: TextStyle(color: Colors.white, fontSize: 18),
-            ),
-            color: colorC2,
-            borderColor: colorC2,
-          ),
+          Obx(() => nameController.isLoading.value
+              ? const Center(
+                  child: CircularProgressIndicator(),
+                )
+              : HomeButton(
+                  onPressed: _onPressed,
+                  child: const Text(
+                    "Confirmar",
+                    style: TextStyle(color: Colors.white, fontSize: 18),
+                  ),
+                  color: colorC2,
+                  borderColor: colorC2,
+                )),
         ]),
       ),
     );

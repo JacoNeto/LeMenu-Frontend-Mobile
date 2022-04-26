@@ -1,11 +1,12 @@
 part 'client_register.g.dart';
 
-class Client {
+class ClientRegister {
   int? tableId;
   String? name;
 
-  Client({this.tableId, this.name});
+  ClientRegister({this.tableId, this.name});
 
-  factory Client.fromJson(Map<String, dynamic> json) => _$ClientFromJson(json);
-  Map<String, dynamic> toJson() => _$ClientToJson(this);
+  factory ClientRegister.fromJson(Map<String, dynamic> json) =>
+      _$ClientRegisterFromJson(json);
+  Map<String, dynamic> toJson() => _$ClientRegisterToJson(this);
 }

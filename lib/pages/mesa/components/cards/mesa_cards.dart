@@ -25,12 +25,8 @@ class MesaCards extends StatelessWidget {
                   shrinkWrap: true,
                   itemCount: cardapioController.selected.value,
                   itemBuilder: (context, index) {
-                    return const MesaCardModel(
-                      image: null,
-                      description:
-                          'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec convallis erat eget mi',
-                      price: 20,
-                      title: 'Alimento Gostoso',
+                    return MesaCardModel(
+                      product: cardapioController.added[index],
                     );
                   })
             ],

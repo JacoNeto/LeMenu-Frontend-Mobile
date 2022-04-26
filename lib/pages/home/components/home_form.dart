@@ -18,7 +18,10 @@ class HomeForm extends StatelessWidget {
       _homeFormKey.currentState!.save();
       if (_homeFormKey.currentState!.validate()) {
         await homeController.open();
-        Navigator.of(context).pushNamed('/nameinfo');
+
+        if (!homeController.error) {
+          Navigator.of(context).pushNamed('/nameinfo');
+        }
       }
     }
 
@@ -68,15 +71,19 @@ class HomeForm extends StatelessWidget {
                   color: Colors.white,
                   borderColor: colorC1,
                 ),
-                HomeButton(
-                  onPressed: _onPressed,
-                  child: const Text(
-                    "Liberar Mesa",
-                    style: TextStyle(color: Colors.white, fontSize: 18),
-                  ),
-                  color: colorC1,
-                  borderColor: colorC1,
-                ),
+                Obx(() => homeController.isLoading.value
+                    ? const Center(
+                        child: CircularProgressIndicator(),
+                      )
+                    : HomeButton(
+                        onPressed: _onPressed,
+                        child: const Text(
+                          "Liberar Mesa",
+                          style: TextStyle(color: Colors.white, fontSize: 18),
+                        ),
+                        color: colorC1,
+                        borderColor: colorC1,
+                      )),
               ],
             )
           ],

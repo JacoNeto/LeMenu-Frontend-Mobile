@@ -4,6 +4,7 @@ import 'package:le_menu_mobile/utils/my_colors.dart';
 import 'package:le_menu_mobile/utils/widgets/buttons/home_button.dart';
 
 import '../../controllers/cardapio_controller.dart';
+import '../../controllers/cart_controller.dart';
 import '../../utils/widgets/big_text.dart';
 import 'components/cards/mesa_cards.dart';
 
@@ -12,6 +13,7 @@ class MesaPage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final CartController cartController = Get.put(CartController());
     final CardapioController cardapioController = Get.find();
 
     return Scaffold(
@@ -26,7 +28,8 @@ class MesaPage extends StatelessWidget {
                   children: [
                     Obx(() => BigText(
                         "${cardapioController.selected.value} ${cardapioController.selected.value == 1 ? "Selecionado" : "Selecionados"}")),
-                    Obx(() => BigText("R\$ ${cardapioController.total.value}")),
+                    Obx(() => BigText(
+                        "R\$ ${cardapioController.total.value.toStringAsFixed(2)}")),
                   ],
                 ),
               )),

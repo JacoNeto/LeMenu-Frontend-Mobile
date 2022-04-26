@@ -2,8 +2,12 @@ import 'package:flutter/material.dart';
 import 'package:le_menu_mobile/pages/cardapio/components/cards/components/card_model.dart';
 import 'package:le_menu_mobile/utils/my_colors.dart';
 
+import '../../../../models/product/product.dart';
+
 class Cards extends StatelessWidget {
-  const Cards({Key? key}) : super(key: key);
+  const Cards({Key? key, required this.products}) : super(key: key);
+
+  final List<Product> products;
 
   @override
   Widget build(BuildContext context) {
@@ -20,14 +24,10 @@ class Cards extends StatelessWidget {
                   physics: const NeverScrollableScrollPhysics(),
                   scrollDirection: Axis.vertical,
                   shrinkWrap: true,
-                  itemCount: 8,
+                  itemCount: products.length,
                   itemBuilder: (context, index) {
-                    return const CardModel(
-                      image: null,
-                      description:
-                          'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec convallis erat eget mi',
-                      price: 20,
-                      title: 'Alimento Gostoso',
+                    return CardModel(
+                      product: products[index],
                     );
                   })
             ],
