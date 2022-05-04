@@ -47,6 +47,7 @@ class CardapioController extends GetxController {
     } else {
       JsonUtils.prettyprint(response);
       list = JsonUtils.getProductList(response);
+      list.removeWhere((element) => element.isOnMenu == false);
 
       return list;
     }

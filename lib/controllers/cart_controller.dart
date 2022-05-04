@@ -35,5 +35,31 @@ class CartController extends GetxController {
       debugPrint(response.bodyString);
       MySnackBar.errorSnackbar("algo deu errado");
     }
+    isLoading.value = false;
+  }
+
+  /// Update Table
+  Future<void> updateTable(double total) async {
+    error = false;
+    isLoading.value = true;
+    my.Table table = my.Table();
+
+    final Response response = await _tableConnect.update(my.Table(
+      id: homeController.id,
+    ));
+
+    if (response.isOk) {
+      JsonUtils.prettyprint(response);
+      table = JsonUtils.getTable(response) ?? my.Table();
+      debugPrint(table.id.toString());
+
+      await _tableConnect.open(homeController.id);
+      isLoading.value = false;
+    } else {
+      error = true;
+      debugPrint(response.bodyString);
+      MySnackBar.errorSnackbar("algo deu errado");
+    }
+    isLoading.value = false;
   }
 }

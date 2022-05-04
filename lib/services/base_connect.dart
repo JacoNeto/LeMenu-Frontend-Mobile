@@ -7,14 +7,13 @@ class BaseConnect extends GetConnect {
     Get.log('Base Connect Inicializado');
 
     //URL base
-    httpClient.baseUrl = 'http://localhost:8080';
-    httpClient.addResponseModifier((request, response) {
-      if (Get.isLogEnable) {
-        debugPrint(request.method);
-        debugPrint('${request.url}');
+    //httpClient.baseUrl = 'http://localhost:8080';
+    httpClient.baseUrl = 'https://le-menu-lab.herokuapp.com';
+    httpClient.addResponseModifier((request, response) async {
+      debugPrint(request.method);
+      debugPrint('${request.url}');
 
-        return response;
-      }
+      return response;
     });
 
     // Json Content Type
