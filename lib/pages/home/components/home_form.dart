@@ -17,10 +17,14 @@ class HomeForm extends StatelessWidget {
     Future<void> _onPressed() async {
       _homeFormKey.currentState!.save();
       if (_homeFormKey.currentState!.validate()) {
-        await homeController.open();
+        if (homeController.code == "atendente") {
+          Navigator.of(context).pushNamed('/login');
+        } else {
+          await homeController.open();
 
-        if (!homeController.error) {
-          Navigator.of(context).pushNamed('/nameinfo');
+          if (!homeController.error) {
+            Navigator.of(context).pushNamed('/nameinfo');
+          }
         }
       }
     }

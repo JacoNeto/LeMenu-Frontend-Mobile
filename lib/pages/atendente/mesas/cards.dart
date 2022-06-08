@@ -1,13 +1,13 @@
 import 'package:flutter/material.dart';
-import 'package:le_menu_mobile/pages/cardapio/components/cards/components/card_model.dart';
 import 'package:le_menu_mobile/utils/my_colors.dart';
+import 'package:le_menu_mobile/models/table/table.dart' as my;
 
-import '../../../../models/product/product.dart';
+import 'card_model.dart';
 
 class Cards extends StatelessWidget {
-  const Cards({Key? key, required this.products}) : super(key: key);
+  const Cards({Key? key, required this.tables}) : super(key: key);
 
-  final List<Product> products;
+  final List<my.Table> tables;
 
   @override
   Widget build(BuildContext context) {
@@ -24,10 +24,10 @@ class Cards extends StatelessWidget {
                   physics: const NeverScrollableScrollPhysics(),
                   scrollDirection: Axis.vertical,
                   shrinkWrap: true,
-                  itemCount: products.length,
+                  itemCount: tables.length,
                   itemBuilder: (context, index) {
                     return CardModel(
-                      product: products[index],
+                      table: tables[index],
                     );
                   })
             ],

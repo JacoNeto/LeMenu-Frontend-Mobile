@@ -3,11 +3,14 @@ import 'package:get/get.dart';
 
 import '../models/product/product.dart';
 import '../services/connect/product_connect.dart';
+import '../services/connect/table_connect.dart';
 import '../utils/json_utils.dart';
 import '../utils/widgets/my_snackbar.dart';
+import 'home_controller.dart';
 
 class CardapioController extends GetxController {
   final ProductConnect _connect = Get.put(ProductConnect());
+  final HomeController _homeController = Get.find();
 
   var selected = 0.obs;
   var total = 0.0.obs;
@@ -26,6 +29,7 @@ class CardapioController extends GetxController {
   void unselect(Product product) {
     selected--;
     total.value -= product.price ?? 0;
+    _homeController.removeOrderToTable(product.id!);
     added.removeWhere((element) => element.id == product.id);
   }
 
@@ -47,7 +51,16 @@ class CardapioController extends GetxController {
     } else {
       JsonUtils.prettyprint(response);
       list = JsonUtils.getProductList(response);
-      list.removeWhere((element) => element.isOnMenu == false);
+      list.removeWhere((element) {
+        if (element.isOnMenu == false) {
+          return true;
+        }
+        element.description = element.description ?? "";
+        if (element.description!.contains("ordered")) {
+          return true;
+        }
+        return false;
+      });
 
       return list;
     }
@@ -62,13 +75,7 @@ class CardapioController extends GetxController {
 
     if (added.isNotEmpty) {
       for (var element in added) {
-        if (element.isOnMenu!) {
-          var response = await _connect.putInto(element.id!);
-          myError(response);
-        } else {
-          var response = await _connect.peek(element.id!);
-          myError(response);
-        }
+        await _homeController.addOrderToTable(element.id!);
       }
     }
 

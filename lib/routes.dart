@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:le_menu_mobile/pages/atendente/atendente_page.dart';
 import 'package:le_menu_mobile/pages/home/components/qr_code.dart';
+import 'package:le_menu_mobile/pages/login/login_page.dart';
 
 import 'pages/cardapio/cardapio_page.dart';
 import 'pages/home/home_page.dart';
@@ -26,8 +28,13 @@ class RouteGenerator {
         return MaterialPageRoute(builder: (_) => const CardapioPage());
       case '/mesa':
         return MaterialPageRoute(builder: (_) => const MesaPage());
+      case '/login':
+        return MaterialPageRoute(builder: (_) => const LoginPage());
       case '/resultado':
         return MaterialPageRoute(builder: (_) => ResultPage());
+
+      case '/atendente':
+        return MaterialPageRoute(builder: (_) => AtendentePage());
 
       default:
         return _errorRoute();

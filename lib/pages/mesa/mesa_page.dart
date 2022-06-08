@@ -50,8 +50,12 @@ class MesaPage extends StatelessWidget {
                         )),
                     Obx(() => cardapioController.selected.value >= 1
                         ? HomeButton(
-                            onPressed: () =>
-                                Navigator.of(context).pushNamed('/resultado'),
+                            onPressed: () async {
+                              await cardapioController.changeSelect();
+                              if (!cardapioController.error) {
+                                Navigator.of(context).pushNamed('/resultado');
+                              }
+                            },
                             color: colorC2,
                             borderColor: colorC2,
                             child: const Text(

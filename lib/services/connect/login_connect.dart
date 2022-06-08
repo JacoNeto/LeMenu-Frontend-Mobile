@@ -1,31 +1,19 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:get/get_connect/http/src/request/request.dart';
-import 'package:le_menu_mobile/utils/local_save.dart';
 
-class BaseConnect extends GetConnect {
+class LoginConnect extends GetConnect {
   @override
   void onInit() async {
     Get.log('Base Connect Inicializado');
 
     //URL base
-    //httpClient.baseUrl = 'http://localhost:8080';
-    httpClient.baseUrl = 'http://10.215.12.190:8080';
+    httpClient.baseUrl = 'http://localhost:8080';
     //httpClient.baseUrl = 'https://le-menu-lab.herokuapp.com';
     httpClient.addResponseModifier((request, response) async {
       debugPrint(request.method);
       debugPrint('${request.url}');
 
       return response;
-    });
-
-    httpClient.addRequestModifier((Request request) async {
-      String token = await LocalSave().read("accessToken");
-      token = token.trim().replaceAll("\"", "");
-      debugPrint("Chegou aquiiiiiiiiiii!" + token);
-      request.headers['Authorization'] = "Bearer $token";
-
-      return request;
     });
 
     // Json Content Type
@@ -36,5 +24,14 @@ class BaseConnect extends GetConnect {
 
     //Em caso de falha, número de tentativas
     httpClient.maxAuthRetries = 2;
+  }
+
+  // Login
+  Future<Response> login(String login, String senha) async {
+    Get.log('Login Connect');
+    var map = <String, String>{"login": login, "password": senha};
+    final response = await post('/login', map);
+
+    return response;
   }
 }

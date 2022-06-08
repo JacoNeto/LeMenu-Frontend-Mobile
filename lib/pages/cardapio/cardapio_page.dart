@@ -1,11 +1,13 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:le_menu_mobile/controllers/home_controller.dart';
 import 'package:le_menu_mobile/models/product/product.dart';
 import 'package:le_menu_mobile/pages/cardapio/components/cards/cards.dart';
 import 'package:le_menu_mobile/utils/my_colors.dart';
 import 'package:le_menu_mobile/utils/widgets/buttons/home_button.dart';
 
 import '../../controllers/cardapio_controller.dart';
+import '../../controllers/cart_controller.dart';
 import '../../utils/widgets/big_text.dart';
 
 class CardapioPage extends StatelessWidget {
@@ -14,6 +16,7 @@ class CardapioPage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final CardapioController cardapioController = Get.put(CardapioController());
+    final CartController cartController = Get.put(CartController());
 
     return Scaffold(
       body: FutureBuilder<List<Product>?>(
@@ -48,7 +51,8 @@ class CardapioPage extends StatelessWidget {
                         mainAxisAlignment: MainAxisAlignment.spaceBetween,
                         children: [
                           TextButton(
-                              onPressed: () {
+                              onPressed: () async {
+                                await cartController.close();
                                 Navigator.of(context).pushNamed('/');
                               },
                               child: const Text(
@@ -63,11 +67,8 @@ class CardapioPage extends StatelessWidget {
                                     )
                                   : HomeButton(
                                       onPressed: () async {
-                                        await cardapioController.changeSelect();
-                                        if (!cardapioController.error) {
-                                          Navigator.of(context)
-                                              .pushNamed('/mesa');
-                                        }
+                                        Navigator.of(context)
+                                            .pushNamed('/mesa');
                                       },
                                       color: colorC2,
                                       borderColor: colorC2,

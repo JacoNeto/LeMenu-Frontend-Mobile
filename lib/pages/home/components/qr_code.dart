@@ -2,7 +2,10 @@ import 'dart:io';
 
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
 import 'package:qr_code_scanner/qr_code_scanner.dart';
+
+import '../../../controllers/home_controller.dart';
 
 class QRCodePage extends StatefulWidget {
   const QRCodePage({Key? key}) : super(key: key);
@@ -12,6 +15,7 @@ class QRCodePage extends StatefulWidget {
 }
 
 class _QRCodePageState extends State<QRCodePage> {
+  final HomeController homeController = Get.find();
   final GlobalKey qrKey = GlobalKey(debugLabel: 'QR');
   Barcode? result;
   QRViewController? controller;
@@ -56,10 +60,21 @@ class _QRCodePageState extends State<QRCodePage> {
 
   void _onQRViewCreated(QRViewController controller) {
     this.controller = controller;
-    controller.scannedDataStream.listen((scanData) {
+    // call resumeCamera fucntion
+    controller.resumeCamera();
+    controller.scannedDataStream.listen((scanData) async {
       setState(() {
         result = scanData;
       });
+      if (result != null) {
+        debugPrint("ALOOOOOOOOOOOOOOOOOOOOOOO" + result!.code.toString());
+        homeController.code = result!.code ?? "";
+        await homeController.open().then((value) {
+          if (!homeController.error) {
+            Navigator.of(context).pushNamed('/nameinfo');
+          }
+        });
+      }
     });
   }
 

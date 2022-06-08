@@ -43,6 +43,33 @@ class HomeController extends GetxController {
     isLoading.value = false;
   }
 
+  // add order to table
+  var isOrderLoading = false.obs;
+  var isOrderError = false.obs;
+  Future<void> addOrderToTable(int productId) async {
+    isOrderLoading.value = true;
+    final Response response = await _connect.addOrder(id, productId);
+    if (response.isOk) {
+    } else {
+      error = true;
+      debugPrint(response.bodyString);
+      MySnackBar.errorSnackbar("Não foi possível adicionar o produto");
+    }
+    isOrderLoading.value = false;
+  }
+
+  Future<void> removeOrderToTable(int productId) async {
+    isOrderLoading.value = true;
+    final Response response = await _connect.removeOrder(id, productId);
+    if (response.isOk) {
+    } else {
+      error = true;
+      debugPrint(response.bodyString);
+      MySnackBar.errorSnackbar("Não foi possível remover o produto");
+    }
+    isOrderLoading.value = false;
+  }
+
   void clear() {
     table = "";
     isLoading = false.obs;

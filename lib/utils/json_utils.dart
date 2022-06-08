@@ -32,6 +32,13 @@ class JsonUtils {
     //return json.decode(utf8.decode(response.bodyString!.runes.toList()));
   }
 
+  ///Recupera Pessoa específica
+  static String? getToken(Response response) {
+    Map<String, dynamic> data = getMap(response);
+    String? token = (data['accessToken']);
+    return token;
+  }
+
   ///Recupera Pessoa-Lugar específico
   static my.Table? getTable(Response response) {
     Map<String, dynamic> data = getMap(response);
@@ -40,12 +47,18 @@ class JsonUtils {
   }
 
   static List<Product> getProductList(Response response) {
-    debugPrint("dsfgdhgdrfghghd" + response.bodyString.toString());
     final parsed =
         jsonDecode(response.bodyString.toString()).cast<Map<String, dynamic>>();
-    debugPrint("ALOSDIFHIDFHU");
     final list = parsed.map<Product>((json) => Product.fromJson(json)).toList();
-    debugPrint("ALOSDIFHIDFHU");
+    return list;
+  }
+
+  static List<my.Table> getTableList(Response response) {
+    final parsed =
+        jsonDecode(response.bodyString.toString()).cast<Map<String, dynamic>>();
+    debugPrint("DEBUUUUUG" + parsed.toString());
+    final list =
+        parsed.map<my.Table>((json) => my.Table.fromJson(json)).toList();
     return list;
   }
 }
