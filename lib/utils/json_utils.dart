@@ -4,6 +4,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:get/get_connect/http/src/response/response.dart';
 import 'package:le_menu_mobile/models/client/client.dart';
+import 'package:le_menu_mobile/models/ordered/ordered.dart';
 import 'package:le_menu_mobile/models/product/product.dart';
 import 'package:le_menu_mobile/models/table/table.dart' as my;
 
@@ -50,6 +51,13 @@ class JsonUtils {
     final parsed =
         jsonDecode(response.bodyString.toString()).cast<Map<String, dynamic>>();
     final list = parsed.map<Product>((json) => Product.fromJson(json)).toList();
+    return list;
+  }
+
+  static List<Ordered> getOrderedList(Response response) {
+    final parsed =
+        jsonDecode(response.bodyString.toString()).cast<Map<String, dynamic>>();
+    final list = parsed.map<Ordered>((json) => Ordered.fromJson(json)).toList();
     return list;
   }
 

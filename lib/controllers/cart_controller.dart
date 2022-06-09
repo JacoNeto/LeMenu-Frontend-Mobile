@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
+import '../models/ordered/ordered.dart';
 import '../models/product/product.dart';
 import '../services/connect/table_connect.dart';
 import '../utils/json_utils.dart';
@@ -17,8 +18,8 @@ class CartController extends GetxController {
   final TableConnect _tableConnect = Get.put(TableConnect());
 
   /// Fetch all ordered products from database
-  Future<List<Product>?> getOrdered(int id) async {
-    List<Product> list = [];
+  Future<List<Ordered>?> getOrdered(int id) async {
+    List<Ordered> list = [];
 
     final Response response = await _tableConnect.getOrder(id);
 
@@ -28,7 +29,7 @@ class CartController extends GetxController {
       MySnackBar.errorSnackbar("algo deu errado");
     } else {
       JsonUtils.prettyprint(response);
-      list = JsonUtils.getProductList(response);
+      list = JsonUtils.getOrderedList(response);
       return list;
     }
 

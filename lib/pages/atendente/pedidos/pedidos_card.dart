@@ -19,7 +19,7 @@ class PedidosCard extends StatefulWidget {
 class _PedidosCardState extends State<PedidosCard> {
   var selected = false;
 
-  final CardapioController cardapioController = Get.find();
+  final CardapioController cardapioController = Get.put(CardapioController());
 
   void changeSelect() {
     setState(() {
@@ -71,10 +71,15 @@ class _PedidosCardState extends State<PedidosCard> {
                 flex: 1,
                 child: Column(
                   children: [
-                    CheckBox(
-                        onPressed: changeSelect,
-                        color: colorC2,
-                        marked: selected),
+                    Expanded(
+                      flex: 1,
+                      child: IconButton(
+                          onPressed: () {},
+                          icon: const Icon(
+                            Icons.remove_circle,
+                            color: Colors.red,
+                          )),
+                    ),
                     const SizedBox(
                       height: 8,
                     ),

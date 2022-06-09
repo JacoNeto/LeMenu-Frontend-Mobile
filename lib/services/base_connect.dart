@@ -9,8 +9,8 @@ class BaseConnect extends GetConnect {
     Get.log('Base Connect Inicializado');
 
     //URL base
-    //httpClient.baseUrl = 'http://localhost:8080';
-    httpClient.baseUrl = 'http://10.215.12.190:8080';
+    httpClient.baseUrl = 'http://localhost:8080';
+    //httpClient.baseUrl = 'http://192.168.1.108:8080';
     //httpClient.baseUrl = 'https://le-menu-lab.herokuapp.com';
     httpClient.addResponseModifier((request, response) async {
       debugPrint(request.method);

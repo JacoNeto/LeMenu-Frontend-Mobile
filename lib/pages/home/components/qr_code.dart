@@ -69,11 +69,10 @@ class _QRCodePageState extends State<QRCodePage> {
       if (result != null) {
         debugPrint("ALOOOOOOOOOOOOOOOOOOOOOOO" + result!.code.toString());
         homeController.code = result!.code ?? "";
-        await homeController.open().then((value) {
-          if (!homeController.error) {
-            Navigator.of(context).pushNamed('/nameinfo');
-          }
-        });
+        await homeController.open();
+        if (!homeController.error) {
+          Navigator.of(context).pushNamed('/nameinfo');
+        }
       }
     });
   }

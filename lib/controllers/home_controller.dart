@@ -1,7 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:le_menu_mobile/models/product/product.dart';
 import 'package:le_menu_mobile/models/table/table.dart' as my;
 
+import '../models/ordered/ordered.dart';
 import '../services/connect/table_connect.dart';
 import '../utils/json_utils.dart';
 import '../utils/widgets/my_snackbar.dart';
@@ -46,9 +48,9 @@ class HomeController extends GetxController {
   // add order to table
   var isOrderLoading = false.obs;
   var isOrderError = false.obs;
-  Future<void> addOrderToTable(int productId) async {
+  Future<void> addOrderToTable(Product product) async {
     isOrderLoading.value = true;
-    final Response response = await _connect.addOrder(id, productId);
+    final Response response = await _connect.addOrder(id, product);
     if (response.isOk) {
     } else {
       error = true;
@@ -58,9 +60,9 @@ class HomeController extends GetxController {
     isOrderLoading.value = false;
   }
 
-  Future<void> removeOrderToTable(int productId) async {
+  Future<void> removeOrderToTable(int orderedId) async {
     isOrderLoading.value = true;
-    final Response response = await _connect.removeOrder(id, productId);
+    final Response response = await _connect.removeOrder(id, orderedId);
     if (response.isOk) {
     } else {
       error = true;

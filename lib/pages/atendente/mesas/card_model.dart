@@ -50,15 +50,12 @@ class _CardModelState extends State<CardModel> {
                 const SizedBox(
                   width: 10,
                 ),
-                Expanded(
+                const Expanded(
                   flex: 1,
                   child: IconButton(
-                      onPressed: () {
-                        atendenteController.remove(widget.table.id!);
-                      },
-                      icon: const Icon(
-                        Icons.remove_circle,
-                        color: Colors.red,
+                      onPressed: null,
+                      icon: Icon(
+                        Icons.table_bar,
                       )),
                 )
               ],

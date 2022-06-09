@@ -28,9 +28,6 @@ class LoginController extends GetxController {
 
     if (response.isOk) {
       isLogged = true;
-      token = JsonUtils.getToken(response);
-      LocalSave().save("accessToken", token);
-
       // show the token returned in the terminal
       String tokenn = await LocalSave().read("accessToken");
 

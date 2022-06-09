@@ -1,6 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
+import '../../utils/json_utils.dart';
+import '../../utils/local_save.dart';
+
 class LoginConnect extends GetConnect {
   @override
   void onInit() async {
@@ -12,6 +15,9 @@ class LoginConnect extends GetConnect {
     httpClient.addResponseModifier((request, response) async {
       debugPrint(request.method);
       debugPrint('${request.url}');
+
+      var token = JsonUtils.getToken(response);
+      LocalSave().save("accessToken", token);
 
       return response;
     });

@@ -5,7 +5,7 @@ import '../../models/product/product.dart';
 import '../base_connect.dart';
 
 class ProductConnect extends BaseConnect {
-  // Open
+  // getAll
   Future<Response> getAll() async {
     debugPrint('Product Connect');
     final response = await get('/product/search/all');

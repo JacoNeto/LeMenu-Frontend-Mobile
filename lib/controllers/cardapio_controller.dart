@@ -30,7 +30,6 @@ class CardapioController extends GetxController {
     selected--;
     total.value -= product.price ?? 0;
     _homeController.removeOrderToTable(product.id!);
-    added.removeWhere((element) => element.id == product.id);
   }
 
   void clear() {
@@ -55,10 +54,6 @@ class CardapioController extends GetxController {
         if (element.isOnMenu == false) {
           return true;
         }
-        element.description = element.description ?? "";
-        if (element.description!.contains("ordered")) {
-          return true;
-        }
         return false;
       });
 
@@ -75,7 +70,7 @@ class CardapioController extends GetxController {
 
     if (added.isNotEmpty) {
       for (var element in added) {
-        await _homeController.addOrderToTable(element.id!);
+        await _homeController.addOrderToTable(element);
       }
     }
 

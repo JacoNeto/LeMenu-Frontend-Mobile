@@ -3,6 +3,7 @@ import 'package:flutter/src/foundation/key.dart';
 import 'package:flutter/src/widgets/framework.dart';
 import 'package:get/get.dart';
 import 'package:le_menu_mobile/controllers/cart_controller.dart';
+import 'package:le_menu_mobile/models/ordered/ordered.dart';
 import 'package:le_menu_mobile/models/product/product.dart';
 import 'package:le_menu_mobile/pages/atendente/pedidos/pedidos_card.dart';
 
@@ -19,7 +20,7 @@ class PedidosPage extends StatelessWidget {
       appBar: AppBar(
         title: const Text("Pedidos"),
       ),
-      body: FutureBuilder<List<Product>?>(
+      body: FutureBuilder<List<Ordered>?>(
           future: cartController.getOrdered(tableId),
           builder: (context, snapshot) {
             if (snapshot.connectionState == ConnectionState.waiting) {
@@ -42,7 +43,7 @@ class PedidosPage extends StatelessWidget {
                             itemCount: snapshot.data!.length,
                             itemBuilder: (context, index) {
                               return PedidosCard(
-                                product: snapshot.data![index],
+                                product: snapshot.data![index].product!,
                               );
                             })
                       ],
