@@ -29,7 +29,7 @@ class CardapioController extends GetxController {
   void unselect(Product product) {
     selected--;
     total.value -= product.price ?? 0;
-    _homeController.removeOrderToTable(product.id!);
+    added.removeWhere((element) => element.id == product.id);
   }
 
   void clear() {

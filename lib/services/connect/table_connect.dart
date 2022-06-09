@@ -101,12 +101,9 @@ class TableConnect extends BaseConnect {
   }
 
   // Add Order
-  Future<Response> removeOrder(int id, int orderedId) async {
+  Future<Response> removeOrder(int id, Ordered ordered) async {
     debugPrint('Table Connect');
-    var ordered = <String, dynamic>{
-      "description": "ordered $orderedId",
-    };
-    final response = await put('/table/add-order?id=${id.toString()}', ordered);
+    final response = await put('/table/remove-order?id=${id.toString()}', "");
     //Get.log(response.body.toString());
     debugPrint(response.body.toString());
 

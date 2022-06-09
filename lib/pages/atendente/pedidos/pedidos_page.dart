@@ -44,6 +44,7 @@ class PedidosPage extends StatelessWidget {
                             itemBuilder: (context, index) {
                               return PedidosCard(
                                 product: snapshot.data![index].product!,
+                                ordered: snapshot.data![index],
                               );
                             })
                       ],
