@@ -89,7 +89,7 @@ class TableConnect extends BaseConnect {
     debugPrint('Table Connect');
     var newOrdered = <String, dynamic>{
       "description": "ordered ${product.id!}",
-      "status": "wait",
+      "status": "Wait",
       "product": product.toJson()
     };
     final response =

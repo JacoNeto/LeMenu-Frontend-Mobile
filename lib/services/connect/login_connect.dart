@@ -10,14 +10,13 @@ class LoginConnect extends GetConnect {
     Get.log('Base Connect Inicializado');
 
     //URL base
-    httpClient.baseUrl = 'http://localhost:8080';
-    //httpClient.baseUrl = 'https://le-menu-lab.herokuapp.com';
+    httpClient.baseUrl = 'https://le-menu-lab.herokuapp.com';
     httpClient.addResponseModifier((request, response) async {
       debugPrint(request.method);
       debugPrint('${request.url}');
 
       var token = JsonUtils.getToken(response);
-      LocalSave().save("accessToken", token);
+      await LocalSave().save("accessToken", token);
 
       return response;
     });

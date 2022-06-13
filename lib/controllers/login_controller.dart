@@ -29,10 +29,10 @@ class LoginController extends GetxController {
     if (response.isOk) {
       isLogged = true;
       // show the token returned in the terminal
-      String tokenn = await LocalSave().read("accessToken");
+      // String tokenn = await LocalSave().read("accessToken");
 
       isLogged = true;
-      debugPrint(tokenn);
+      // debugPrint(tokenn);
     } else {
       error = true;
     }

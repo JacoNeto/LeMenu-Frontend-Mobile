@@ -67,11 +67,15 @@ class _QRCodePageState extends State<QRCodePage> {
         result = scanData;
       });
       if (result != null) {
-        debugPrint("ALOOOOOOOOOOOOOOOOOOOOOOO" + result!.code.toString());
-        homeController.code = result!.code ?? "";
-        await homeController.open();
-        if (!homeController.error) {
-          Navigator.of(context).pushNamed('/nameinfo');
+        if (result!.code != null) {
+          if (result!.code!.isNotEmpty) {
+            debugPrint("ALOOOOOOOOOOOOOOOOOOOOOOO" + result!.code.toString());
+            homeController.code = result!.code ?? "";
+            await homeController.open();
+            if (!homeController.error) {
+              Navigator.of(context).pushNamed('/nameinfo');
+            }
+          }
         }
       }
     });
