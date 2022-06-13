@@ -10,11 +10,16 @@ import '../../../../../utils/widgets/network_image.dart';
 import '../../../models/ordered/ordered.dart';
 
 class PedidosCard extends StatefulWidget {
-  const PedidosCard({Key? key, required this.product, required this.ordered})
+  const PedidosCard(
+      {Key? key,
+      required this.product,
+      required this.ordered,
+      required this.tableId})
       : super(key: key);
 
   final Product product;
   final Ordered ordered;
+  final int tableId;
 
   @override
   State<PedidosCard> createState() => _PedidosCardState();
@@ -76,17 +81,16 @@ class _PedidosCardState extends State<PedidosCard> {
                 flex: 1,
                 child: Column(
                   children: [
-                    Expanded(
-                      flex: 1,
-                      child: IconButton(
-                          onPressed: () {
-                            homeController.removeOrderToTable(widget.ordered);
-                          },
-                          icon: const Icon(
-                            Icons.remove_circle,
-                            color: Colors.red,
-                          )),
-                    ),
+                    IconButton(
+                        onPressed: () async {
+                          await homeController.removeOrderToTable(
+                              widget.tableId, widget.ordered);
+                          setState(() {});
+                        },
+                        icon: const Icon(
+                          Icons.remove_circle,
+                          color: Colors.red,
+                        )),
                     const SizedBox(
                       height: 8,
                     ),

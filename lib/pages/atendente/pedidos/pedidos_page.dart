@@ -6,11 +6,12 @@ import 'package:le_menu_mobile/controllers/cart_controller.dart';
 import 'package:le_menu_mobile/models/ordered/ordered.dart';
 import 'package:le_menu_mobile/models/product/product.dart';
 import 'package:le_menu_mobile/pages/atendente/pedidos/pedidos_card.dart';
+import 'package:le_menu_mobile/models/table/table.dart' as my;
 
 class PedidosPage extends StatelessWidget {
-  PedidosPage({Key? key, required this.tableId}) : super(key: key);
+  PedidosPage({Key? key, required this.table}) : super(key: key);
 
-  final int tableId;
+  final my.Table table;
 
   final cartController = Get.put(CartController());
 
@@ -18,10 +19,10 @@ class PedidosPage extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: const Text("Pedidos"),
+        title: Text("Pedidos - Mesa " + (table.code ?? "")),
       ),
       body: FutureBuilder<List<Ordered>?>(
-          future: cartController.getOrdered(tableId),
+          future: cartController.getOrdered(table.id!),
           builder: (context, snapshot) {
             if (snapshot.connectionState == ConnectionState.waiting) {
               return const Center(child: CircularProgressIndicator());
@@ -45,6 +46,7 @@ class PedidosPage extends StatelessWidget {
                               return PedidosCard(
                                 product: snapshot.data![index].product!,
                                 ordered: snapshot.data![index],
+                                tableId: table.id!,
                               );
                             })
                       ],

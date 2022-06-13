@@ -1,7 +1,6 @@
 import 'package:get/get_connect/http/src/response/response.dart';
 import 'package:flutter/material.dart';
 
-import '../../models/product/product.dart';
 import '../base_connect.dart';
 
 class ProductConnect extends BaseConnect {

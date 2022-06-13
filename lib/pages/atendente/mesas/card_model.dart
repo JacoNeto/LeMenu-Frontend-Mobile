@@ -30,7 +30,7 @@ class _CardModelState extends State<CardModel> {
       padding: const EdgeInsets.only(top: 2.0, left: 8.0, right: 8.0),
       child: InkWell(
         onTap: () {
-          Get.to(PedidosPage(tableId: widget.table.id!));
+          Get.to(PedidosPage(table: widget.table));
         },
         child: Card(
           child: Padding(

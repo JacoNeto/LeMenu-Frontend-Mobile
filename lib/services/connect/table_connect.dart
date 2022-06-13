@@ -103,7 +103,8 @@ class TableConnect extends BaseConnect {
   // Add Order
   Future<Response> removeOrder(int id, Ordered ordered) async {
     debugPrint('Table Connect');
-    final response = await put('/table/remove-order?id=${id.toString()}', "");
+    final response =
+        await put('/table/remove-order?id=${id.toString()}', ordered.toJson());
     //Get.log(response.body.toString());
     debugPrint(response.body.toString());
 

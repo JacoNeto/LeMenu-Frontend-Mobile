@@ -60,7 +60,7 @@ class HomeController extends GetxController {
     isOrderLoading.value = false;
   }
 
-  Future<void> removeOrderToTable(Ordered ordered) async {
+  Future<void> removeOrderToTable(int id, Ordered ordered) async {
     isOrderLoading.value = true;
     final Response response = await _connect.removeOrder(id, ordered);
     if (response.isOk) {
