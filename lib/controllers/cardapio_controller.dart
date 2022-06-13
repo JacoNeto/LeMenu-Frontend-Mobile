@@ -70,7 +70,10 @@ class CardapioController extends GetxController {
 
     if (added.isNotEmpty) {
       for (var element in added) {
-        await _homeController.addOrderToTable(element);
+        error = await _homeController.addOrderToTable(element);
+        if (error == true) {
+          break;
+        }
       }
     }
 

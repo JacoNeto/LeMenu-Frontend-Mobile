@@ -48,7 +48,7 @@ class HomeController extends GetxController {
   // add order to table
   var isOrderLoading = false.obs;
   var isOrderError = false.obs;
-  Future<void> addOrderToTable(Product product) async {
+  Future<bool> addOrderToTable(Product product) async {
     isOrderLoading.value = true;
     final Response response = await _connect.addOrder(id, product);
     if (response.isOk) {
@@ -58,6 +58,7 @@ class HomeController extends GetxController {
       MySnackBar.errorSnackbar("Não foi possível adicionar o produto");
     }
     isOrderLoading.value = false;
+    return error;
   }
 
   Future<void> removeOrderToTable(int id, Ordered ordered) async {

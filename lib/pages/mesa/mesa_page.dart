@@ -49,21 +49,26 @@ class MesaPage extends StatelessWidget {
                           style: TextStyle(color: Colors.red, fontSize: 18),
                         )),
                     Obx(() => cardapioController.selected.value >= 1
-                        ? HomeButton(
-                            onPressed: () async {
-                              await cardapioController.changeSelect();
-                              if (!cardapioController.error) {
-                                Navigator.of(context).pushNamed('/resultado');
-                              }
-                            },
-                            color: colorC2,
-                            borderColor: colorC2,
-                            child: const Text(
-                              "Concluir",
-                              style:
-                                  TextStyle(color: Colors.white, fontSize: 18),
-                            ),
-                          )
+                        ? (cardapioController.isLoading.value
+                            ? const Center(
+                                child: CircularProgressIndicator(),
+                              )
+                            : HomeButton(
+                                onPressed: () async {
+                                  await cardapioController.changeSelect();
+                                  if (!cardapioController.error) {
+                                    Navigator.of(context)
+                                        .pushNamed('/resultado');
+                                  }
+                                },
+                                color: colorC2,
+                                borderColor: colorC2,
+                                child: const Text(
+                                  "Concluir",
+                                  style: TextStyle(
+                                      color: Colors.white, fontSize: 18),
+                                ),
+                              ))
                         : const SizedBox.shrink()),
                   ],
                 ),
